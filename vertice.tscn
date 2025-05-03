@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://18slyq1n5fif"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8o4er"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t88h7"]
+transparency = 1
+albedo_color = Color(0.538648, 0.923672, 0.892666, 0.454902)
+emission_enabled = true
+emission = Color(0, 0.604678, 0.542035, 1)
+
+[node name="Vertice" type="Node3D"]
+
+[node name="column" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_8o4er")
+surface_material_override/0 = SubResource("StandardMaterial3D_t88h7")

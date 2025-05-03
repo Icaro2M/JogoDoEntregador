@@ -7,6 +7,21 @@ var steer_target = 0
 @export var engine_force_value = 40
 
 
+@onready var agent: NavigationAgent3D = $NavigationAgent3D
+@onready var navigation_map: NavigationRegion3D = $"../city/NavigationRegion3D"  # ajuste o caminho se necessário
+
+var target_position: Vector3 = Vector3.ZERO  # posição do destino
+var path: PackedVector3Array = []
+
+func set_destination(position: Vector3):
+	target_position = position
+	agent.set_target_position(target_position)
+	agent.set_navigation_map(navigation_map)
+	await agent.path_changed
+	path = agent.get_current_path()
+
+
+
 func _physics_process(delta):
 	var speed = linear_velocity.length()*Engine.get_frames_per_second()*delta
 	traction(speed)

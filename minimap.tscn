@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://xqlb4cl2si44"]
+[gd_scene load_steps=5 format=3 uid="uid://xqlb4cl2si44"]
 
 [ext_resource type="Script" path="res://minimap.gd" id="1_aadnu"]
 [ext_resource type="Texture2D" uid="uid://cupxmva4wtsft" path="res://imgs/mapateste1.png" id="2_buhkv"]
 [ext_resource type="Texture2D" uid="uid://dal7qs3ohe2v4" path="res://imgs/setacarro.png" id="3_0iwv5"]
+[ext_resource type="PackedScene" uid="uid://mf6qu6qpf8vf" path="res://Rotas.tscn" id="4_klr5i"]
 
 [node name="Minimap" type="ColorRect"]
 anchors_preset = 1
@@ -37,9 +38,12 @@ current = true
 size = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+visible = false
 position = Vector2(15, 35)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_buhkv")
+
+[node name="Rotas" parent="SubViewportContainer/SubViewport" instance=ExtResource("4_klr5i")]
 
 [node name="Sprite2D2" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(100, 100)
