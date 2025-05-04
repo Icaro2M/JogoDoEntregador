@@ -38,7 +38,7 @@ func montar_caminho(lista,node):
 
 	var listaC = lista.slice(idx,lista.size())
 	
-	print(listaC,"\n")
+	
 	
 	var first = true
 	for vertice in listaC:

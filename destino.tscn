@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://clbt7xn551ltd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ealno"]
+size = Vector3(2.50342, 1.36731, 2.03894)
+
+[node name="Ponto" type="Area3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("BoxShape3D_ealno")

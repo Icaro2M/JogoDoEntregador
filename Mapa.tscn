@@ -1,5 +1,6 @@
-[gd_scene load_steps=59 format=3 uid="uid://bvky810fxlr8l"]
+[gd_scene load_steps=63 format=3 uid="uid://bvky810fxlr8l"]
 
+[ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
 [ext_resource type="PackedScene" uid="uid://ci8vreesq62qh" path="res://Cidade/building_B.gltf" id="2_ovwfq"]
 [ext_resource type="PackedScene" uid="uid://bmui1h27wfrax" path="res://Cidade/building_C.gltf" id="3_uwovd"]
@@ -55,6 +56,9 @@
 [ext_resource type="PackedScene" uid="uid://hbbdogfjavct" path="res://carro.tscn" id="52_dh8w2"]
 [ext_resource type="PackedScene" uid="uid://xqlb4cl2si44" path="res://minimap.tscn" id="53_sw417"]
 [ext_resource type="PackedScene" uid="uid://18slyq1n5fif" path="res://vertice.tscn" id="55_2528n"]
+[ext_resource type="PackedScene" uid="uid://42jmd2xvmwqb" path="res://NPC.tscn" id="57_ngs6f"]
+[ext_resource type="PackedScene" uid="uid://ceaf1u5d8yti2" path="res://ponto.tscn" id="58_juogd"]
+[ext_resource type="PackedScene" uid="uid://clbt7xn551ltd" path="res://destino.tscn" id="59_mc35t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sqypw"]
 sky_top_color = Color(0.285603, 0.463941, 0.635515, 1)
@@ -68,6 +72,7 @@ background_mode = 2
 sky = SubResource("Sky_ypv8u")
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_3r1xo")
 
 [node name="city" type="Node3D" parent="."]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -1680,10 +1685,6 @@ shadow_enabled = true
 [node name="carro" parent="." instance=ExtResource("52_dh8w2")]
 transform = Transform3D(0.0349169, 0, -0.99939, 0, 1, 0, 0.99939, 0, 0.0349169, -0.775635, 0.349999, 8.60383)
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="carro"]
-path_desired_distance = 0.1
-target_desired_distance = 0.1
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Minimap" parent="CanvasLayer" instance=ExtResource("53_sw417")]
@@ -1762,3 +1763,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7618, 0.365, 69.9849)
 
 [node name="Vertice23" parent="vertices/Inter" instance=ExtResource("55_2528n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4498, 0.350003, 70.5543)
+
+[node name="NPC" parent="." instance=ExtResource("57_ngs6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.981, 0.5, -51.6863)
+playerP = NodePath("../carro")
+
+[node name="Ponto" parent="." instance=ExtResource("58_juogd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.762, 1, -52.622)
+
+[node name="destino" parent="." instance=ExtResource("59_mc35t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.98, 1, -4.776)
+
+[connection signal="body_entered" from="Ponto" to="NPC" method="_on_ponto_body_entered"]
+[connection signal="body_entered" from="destino" to="NPC" method="_on_destino_body_entered"]
