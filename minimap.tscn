@@ -6,14 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://mf6qu6qpf8vf" path="res://Rotas.tscn" id="4_klr5i"]
 
 [node name="Minimap" type="ColorRect"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -223.0
-offset_top = 27.0
-offset_right = -23.0
-offset_bottom = 227.0
-grow_horizontal = 0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = -229.0
+offset_right = 238.0
+offset_bottom = -29.0
+grow_vertical = 0
 color = Color(0.172833, 0.172833, 0.172833, 1)
 script = ExtResource("1_aadnu")
 
