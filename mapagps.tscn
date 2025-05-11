@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxm01pfl57fj8"]
+
+[ext_resource type="Script" path="res://mapagps.gd" id="1_awmcm"]
+[ext_resource type="PackedScene" uid="uid://ctr4tvhehb5od" path="res://rotasmapa.tscn" id="3_vcsq8"]
+[ext_resource type="Texture2D" uid="uid://dal7qs3ohe2v4" path="res://imgs/setacarro.png" id="4_c8qre"]
+
+[node name="mapagps" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0.17, 0.17, 0.17, 0.803922)
+script = ExtResource("1_awmcm")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -505.0
+offset_top = -408.5
+offset_right = 505.0
+offset_bottom = 408.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 1024.0
+
+[node name="SubViewport" type="SubViewport" parent="Control/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="Rotas" parent="Control/SubViewportContainer/SubViewport" instance=ExtResource("3_vcsq8")]
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control/SubViewportContainer/SubViewport"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_c8qre")

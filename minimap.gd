@@ -4,6 +4,7 @@ extends ColorRect
 @export var zoom_factor : float = 1  # Fator de zoom positivo para reduzir o zoom, onde 1 é o padrão
 @onready var player := get_node(target)
 
+@onready var mapa = $"../../CanvasLayer2/mapagps"
 @onready var img := $SubViewportContainer/SubViewport/Rotas/Sprite2D
 @onready var line := $SubViewportContainer/SubViewport/Rotas/Sprite2D/Line2D
 @onready var arrow := $SubViewportContainer/SubViewport/Sprite2D2
@@ -17,6 +18,9 @@ extends ColorRect
 @onready var nodeAtual = null
 @onready var camera := $SubViewportContainer/SubViewport/Camera3D
 
+
+
+
 func _ready() -> void:
 	camera.position = Vector3(0, 1, 0)
 	camera.fov = 90
@@ -25,6 +29,7 @@ func _ready() -> void:
 
 func montar_caminho(lista, node):
 	line.clear_points()
+	mapa.line_clear()
 	var idx = 0
 	if node in lista:
 		for i in lista.size():
@@ -41,8 +46,10 @@ func montar_caminho(lista, node):
 	for vertice in listaC:
 		if first:
 			line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 70))
+			mapa.create_line_point(vertice.position.z,vertice.position.x)
 			first = false
 		line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 70))
+		mapa.create_line_point(vertice.position.z,vertice.position.x)
 
 func _process(delta: float) -> void:
 	if target:
@@ -50,7 +57,8 @@ func _process(delta: float) -> void:
 		arrow.rotation = -player.global_rotation.y + 80.1
 
 		line.set_point_position(0, Vector2((player.position.z * 3 + 60) * zoom_factor, (-player.position.x * 3 + 70) * zoom_factor))
-
+		mapa.line_follow(player.position.z,player.position.x)
+		
 		var prox = get_mais_proximo()
 		if prox != nodeAtual:
 			nodeAtual = prox
