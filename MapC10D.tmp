@@ -1693,6 +1693,7 @@ transform = Transform3D(0.0349169, 0, -0.99939, 0, 1, 0, 0.99939, 0, 0.0349169, 
 [node name="Minimap" parent="CanvasLayer" instance=ExtResource("53_sw417")]
 modulate = Color(1, 1, 1, 0.627451)
 target = NodePath("../../carro")
+zoom_factor = null
 
 [node name="vertices" type="Node3D" parent="."]
 

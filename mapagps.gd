@@ -23,10 +23,11 @@ func create_line_point(pos_z,pos_x):
 	if iniciou:		
 		line.add_point(Vector2(2.9*pos_z + 57, 2.9*-pos_x + 60))
 
-func line_follow(pos_z,pos_x):
-	if iniciou:	
-		line.set_point_position(0,Vector2(2.9*pos_z + 57, 2.9*-pos_x + 60))
+func line_follow(pos_z, pos_x):
+	if iniciou and line.get_point_count() > 0:
+		line.set_point_position(0, Vector2(2.9 * pos_z + 57, 2.9 * -pos_x + 60))
+
 func line_clear():
-	
-	if iniciou:	
+	if iniciou:
 		line.clear_points()
+		line.add_point(Vector2.ZERO)  # ou alguma posição válida inicial
