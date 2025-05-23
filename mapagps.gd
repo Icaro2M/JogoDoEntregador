@@ -30,4 +30,4 @@ func line_follow(pos_z, pos_x):
 func line_clear():
 	if iniciou:
 		line.clear_points()
-		line.add_point(Vector2.ZERO)  # ou alguma posição válida inicial
+		line.add_point(Vector2.ZERO)  

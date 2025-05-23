@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bvky810fxlr8l"]
+[gd_scene load_steps=65 format=3 uid="uid://bvky810fxlr8l"]
 
 [ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
@@ -55,13 +55,12 @@
 [ext_resource type="PackedScene" uid="uid://dvwo2t2yt11l7" path="res://Cidade/car_sedan.gltf" id="51_s5pow"]
 [ext_resource type="PackedScene" uid="uid://hbbdogfjavct" path="res://carro.tscn" id="52_dh8w2"]
 [ext_resource type="PackedScene" uid="uid://xqlb4cl2si44" path="res://minimap.tscn" id="53_sw417"]
-[ext_resource type="PackedScene" uid="uid://18slyq1n5fif" path="res://vertice.tscn" id="55_2528n"]
-[ext_resource type="Script" path="res://vertice.gd" id="57_11b87"]
 [ext_resource type="PackedScene" uid="uid://42jmd2xvmwqb" path="res://NPC.tscn" id="57_ngs6f"]
 [ext_resource type="PackedScene" uid="uid://ceaf1u5d8yti2" path="res://ponto.tscn" id="58_juogd"]
 [ext_resource type="PackedScene" uid="uid://clbt7xn551ltd" path="res://destino.tscn" id="59_mc35t"]
 [ext_resource type="PackedScene" uid="uid://dxm01pfl57fj8" path="res://mapagps.tscn" id="60_agpmf"]
 [ext_resource type="Script" path="res://canvas_layer_2.gd" id="60_hjrt0"]
+[ext_resource type="PackedScene" uid="uid://daolp66cst5y4" path="res://vtx.tscn" id="63_jeai0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sqypw"]
 sky_top_color = Color(0.285603, 0.463941, 0.635515, 1)
@@ -1694,123 +1693,6 @@ transform = Transform3D(0.0349169, 0, -0.99939, 0, 1, 0, 0.99939, 0, 0.0349169, 
 modulate = Color(1, 1, 1, 0.627451)
 target = NodePath("../../carro")
 
-[node name="vertices" type="Node3D" parent="."]
-
-[node name="Inter" type="Node3D" parent="vertices"]
-
-[node name="Vertice" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.8681, 0.350001, -99.3497)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice2"), NodePath("../Vertice3")]
-
-[node name="Vertice2" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.336, 0.350003, -99.7037)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice"), NodePath("../Vertice4")]
-
-[node name="Vertice3" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.0729, 0.350003, -79.4772)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice4"), NodePath("../Vertice6"), NodePath("../Vertice")]
-
-[node name="Vertice4" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.326, 0.350003, -79.8161)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice2"), NodePath("../Vertice3"), NodePath("../Vertice5")]
-
-[node name="Vertice5" parent="vertices/Inter" instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.72331, 0.349998, -77.7868)
-script = ExtResource("57_11b87")
-
-[node name="Vertice6" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.5328, 0.349998, -51.4965)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice3"), NodePath("../Vertice7"), NodePath("../Vertice9")]
-
-[node name="Vertice7" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9099, 0.349998, -49.6001)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice6"), NodePath("../Vertice8"), NodePath("../Vertice10")]
-
-[node name="Vertice8" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.29794, 0.349998, -50.7382)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice11"), NodePath("../Vertice7"), NodePath("../Vertice5")]
-
-[node name="Vertice9" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.2234, 0.350003, -20.3499)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice10"), NodePath("../Vertice6"), NodePath("../Vertice13")]
-
-[node name="Vertice10" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6707, 0.413764, -19.374)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice11"), NodePath("../Vertice9"), NodePath("../Vertice14"), NodePath("../Vertice7")]
-
-[node name="Vertice11" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1099, 0.350001, -19.0791)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice8"), NodePath("../Vertice10"), NodePath("../Vertice12"), NodePath("../Vertice15")]
-
-[node name="Vertice12" parent="vertices/Inter" instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.6609, 0.349998, -18.1485)
-script = ExtResource("57_11b87")
-
-[node name="Vertice13" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.2277, 0.349998, 10.0276)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice9"), NodePath("../Vertice17"), NodePath("../Vertice14")]
-
-[node name="Vertice14" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6991, 0.350003, 9.58397)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice18"), NodePath("../Vertice13"), NodePath("../Vertice10"), NodePath("../Vertice15")]
-
-[node name="Vertice15" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.81274, 0.350003, 9.80462)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice14"), NodePath("../Vertice11"), NodePath("../Vertice19"), NodePath("../Vertice16")]
-
-[node name="Vertice16" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.2941, 0.349998, 9.2988)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice15"), NodePath("../Vertice12")]
-
-[node name="Vertice17" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.9381, 0.364995, 40.1582)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice13"), NodePath("../Vertice21"), NodePath("../Vertice18")]
-
-[node name="Vertice18" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4848, 0.350003, 39.9243)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice17"), NodePath("../Vertice14"), NodePath("../Vertice19"), NodePath("../Vertice22")]
-
-[node name="Vertice19" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1997, 0.349998, 39.7757)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice23"), NodePath("../Vertice18"), NodePath("../Vertice15"), NodePath("../Vertice20")]
-
-[node name="Vertice20" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.2668, 0.349998, 39.3104)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice19"), NodePath("../Vertice16"), NodePath("../Vertice15")]
-
-[node name="Vertice21" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.424, 0.365, 69.312)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice17"), NodePath("../Vertice22")]
-
-[node name="Vertice22" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7618, 0.365, 69.9849)
-script = ExtResource("57_11b87")
-neighbors = [null, null, null]
-
-[node name="Vertice23" parent="vertices/Inter" node_paths=PackedStringArray("neighbors") instance=ExtResource("55_2528n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4498, 0.350003, 70.5543)
-script = ExtResource("57_11b87")
-neighbors = [NodePath("../Vertice19"), NodePath("../Vertice22")]
-
 [node name="NPC" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.981, 0.5, -51.6863)
 playerP = NodePath("../carro")
@@ -1827,6 +1709,153 @@ script = ExtResource("60_hjrt0")
 
 [node name="mapagps" parent="CanvasLayer2" instance=ExtResource("60_agpmf")]
 target = NodePath("../../carro")
+
+[node name="Vtxs" type="Node3D" parent="."]
+visible = false
+
+[node name="Vtx" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -100)
+South = NodePath("../Vtx3")
+West = NodePath("../Vtx2")
+
+[node name="Vtx2" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -100)
+South = NodePath("../Vtx4")
+East = NodePath("../Vtx")
+
+[node name="Vtx3" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -80)
+North = NodePath("../Vtx")
+South = NodePath("../Vtx6")
+West = NodePath("../Vtx4")
+
+[node name="Vtx4" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -80)
+North = NodePath("../Vtx2")
+South = NodePath("../Vtx7")
+East = NodePath("../Vtx3")
+West = NodePath("../Vtx5")
+
+[node name="Vtx5" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -80)
+South = NodePath("../Vtx8")
+East = NodePath("../Vtx4")
+
+[node name="Vtx6" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -50)
+North = NodePath("../Vtx3")
+South = NodePath("../Vtx9")
+West = NodePath("../Vtx7")
+
+[node name="Vtx7" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -50)
+North = NodePath("../Vtx4")
+South = NodePath("../Vtx10")
+East = NodePath("../Vtx6")
+West = NodePath("../Vtx8")
+
+[node name="Vtx8" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -50)
+North = NodePath("../Vtx5")
+South = NodePath("../Vtx11")
+East = NodePath("../Vtx7")
+
+[node name="Vtx9" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -20)
+North = NodePath("../Vtx6")
+South = NodePath("../Vtx13")
+West = NodePath("../Vtx10")
+
+[node name="Vtx10" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -20)
+North = NodePath("../Vtx7")
+South = NodePath("../Vtx14")
+East = NodePath("../Vtx9")
+West = NodePath("../Vtx11")
+
+[node name="Vtx11" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -20)
+North = NodePath("../Vtx8")
+South = NodePath("../Vtx15")
+East = NodePath("../Vtx10")
+West = NodePath("../Vtx12")
+
+[node name="Vtx12" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, -20)
+South = NodePath("../Vtx16")
+East = NodePath("../Vtx11")
+
+[node name="Vtx13" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 10)
+North = NodePath("../Vtx9")
+South = NodePath("../Vtx17")
+West = NodePath("../Vtx14")
+
+[node name="Vtx14" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 10)
+North = NodePath("../Vtx10")
+South = NodePath("../Vtx18")
+East = NodePath("../Vtx13")
+West = NodePath("../Vtx15")
+
+[node name="Vtx15" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 10)
+North = NodePath("../Vtx11")
+South = NodePath("../Vtx19")
+East = NodePath("../Vtx14")
+West = NodePath("../Vtx24")
+
+[node name="Vtx16" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, 10)
+North = NodePath("../Vtx12")
+East = NodePath("../Vtx24")
+
+[node name="Vtx17" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 40)
+North = NodePath("../Vtx13")
+South = NodePath("../Vtx21")
+West = NodePath("../Vtx18")
+
+[node name="Vtx18" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 40)
+North = NodePath("../Vtx14")
+South = NodePath("../Vtx22")
+East = NodePath("../Vtx17")
+West = NodePath("../Vtx19")
+
+[node name="Vtx19" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 40)
+North = NodePath("../Vtx15")
+South = NodePath("../Vtx23")
+East = NodePath("../Vtx18")
+West = NodePath("../Vtx20")
+
+[node name="Vtx20" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 40)
+North = NodePath("../Vtx24")
+East = NodePath("../Vtx19")
+
+[node name="Vtx21" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 70)
+North = NodePath("../Vtx17")
+West = NodePath("../Vtx22")
+
+[node name="Vtx22" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 70)
+North = NodePath("../Vtx18")
+East = NodePath("../Vtx21")
+West = NodePath("../Vtx23")
+
+[node name="Vtx23" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 70)
+North = NodePath("../Vtx19")
+East = NodePath("../Vtx22")
+
+[node name="Vtx24" parent="Vtxs" instance=ExtResource("63_jeai0")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 10)
+South = NodePath("../Vtx20")
+East = NodePath("../Vtx15")
+West = NodePath("../Vtx16")
 
 [connection signal="body_entered" from="Ponto" to="NPC" method="_on_ponto_body_entered"]
 [connection signal="body_entered" from="destino" to="NPC" method="_on_destino_body_entered"]

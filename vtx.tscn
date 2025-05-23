@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://daolp66cst5y4"]
+
+[ext_resource type="Script" path="res://vtx.gd" id="1_a541j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ad81v"]
+size = Vector3(1.78918, 1, 0.00793457)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qmsis"]
+
+[node name="Vtx" type="Area3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("1_a541j")
+
+[node name="north" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506, -0.91)
+shape = SubResource("BoxShape3D_ad81v")
+
+[node name="south" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506, 0.91)
+shape = SubResource("BoxShape3D_ad81v")
+
+[node name="east" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.914375, 0.506, 0)
+shape = SubResource("BoxShape3D_ad81v")
+
+[node name="west" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.914, 0.506, 0)
+shape = SubResource("BoxShape3D_ad81v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.74669, 0, 0, 0, 1, 0, 0, 0, 1.74717, 0, 0.505137, 0)
+mesh = SubResource("BoxMesh_qmsis")
