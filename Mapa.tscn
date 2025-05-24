@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bvky810fxlr8l"]
+[gd_scene load_steps=71 format=3 uid="uid://bvky810fxlr8l"]
 
 [ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
@@ -60,7 +60,12 @@
 [ext_resource type="PackedScene" uid="uid://clbt7xn551ltd" path="res://destino.tscn" id="59_mc35t"]
 [ext_resource type="PackedScene" uid="uid://dxm01pfl57fj8" path="res://mapagps.tscn" id="60_agpmf"]
 [ext_resource type="Script" path="res://canvas_layer_2.gd" id="60_hjrt0"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="62_gewgi"]
+[ext_resource type="Resource" path="res://Terrain/data.hterrain" id="63_1olgm"]
 [ext_resource type="PackedScene" uid="uid://daolp66cst5y4" path="res://vtx.tscn" id="63_jeai0"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="64_ogvvv"]
+[ext_resource type="AudioStream" uid="uid://c7v73y111l8f3" path="res://Sons/SomUrbano.mp3" id="65_xmvnn"]
+[ext_resource type="AudioStream" uid="uid://w10uo3yghe3m" path="res://Sons/Buzina.mp3" id="66_n2rmq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sqypw"]
 sky_top_color = Color(0.285603, 0.463941, 0.635515, 1)
@@ -72,6 +77,11 @@ sky_material = SubResource("ProceduralSkyMaterial_sqypw")
 [sub_resource type="Environment" id="Environment_h2pxc"]
 background_mode = 2
 sky = SubResource("Sky_ypv8u")
+
+[sub_resource type="Resource" id="Resource_8mn7q"]
+script = ExtResource("64_ogvvv")
+mode = 0
+textures = [[], []]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_3r1xo")
@@ -1856,6 +1866,33 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 10)
 South = NodePath("../Vtx20")
 East = NodePath("../Vtx15")
 West = NodePath("../Vtx16")
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("62_gewgi")
+centered = true
+_terrain_data = ExtResource("63_1olgm")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_8mn7q")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+
+[node name="SomUrbano" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("65_xmvnn")
+autoplay = true
+parameters/looping = true
+
+[node name="Buzina" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("66_n2rmq")
 
 [connection signal="body_entered" from="Ponto" to="NPC" method="_on_ponto_body_entered"]
 [connection signal="body_entered" from="destino" to="NPC" method="_on_destino_body_entered"]

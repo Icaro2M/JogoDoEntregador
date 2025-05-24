@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 
 @onready var mapa = $CanvasLayer2
 @onready var gps = $CanvasLayer
+@onready var buzina = get_tree().get_current_scene().get_node("Buzina")
 
 @onready var active = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,4 +26,6 @@ func _input(event: InputEvent) -> void:
 			mapa.visible = true
 			gps.visible = false
 			active = true
-			
+
+	if Input.is_action_just_pressed("buzinar"):
+		buzina.play()

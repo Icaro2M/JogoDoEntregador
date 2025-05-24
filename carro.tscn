@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://hbbdogfjavct"]
 
 [ext_resource type="Script" path="res://cars/BaseCar.gd" id="1_2j1dy"]
-[ext_resource type="Texture2D" uid="uid://bamqvnyqs0eyc" path="res://Cidade/citybits_texture.png" id="2_wctkj"]
+[ext_resource type="Texture2D" uid="uid://dijf3h8er3s6j" path="res://Cidade/citybits_texture.png" id="2_wctkj"]
 [ext_resource type="PackedScene" uid="uid://8sl5gmdd6o6w" path="res://cars/camera/camera_3d.tscn" id="3_x4psv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2b47"]
