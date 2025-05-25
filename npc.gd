@@ -26,7 +26,7 @@ func _physics_process(delta):
 			move_towards(player.global_transform.origin, delta)
 			animation.play("walkN")
 			if is_close_to(player.global_transform.origin):
-				print("embarcou")
+				
 				player.set_frozen(false)
 				current_state = State.DISAPPEAR
 		State.DISAPPEAR:

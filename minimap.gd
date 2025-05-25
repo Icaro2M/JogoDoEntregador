@@ -169,19 +169,54 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 @onready var caminho_atual: Array = []
 
 
-
+@onready var nodeAnterior = [null,null]
 @onready var nodeAtual = [null,null]
 @onready var destinoAtual = [null,null]
-	
+
+@onready var distancia_total = 0
+
 
 func _ready():
+	var vtxs_node = get_node("../../Vtxs")  # ajuste o caminho conforme sua estrutura
+	for child in vtxs_node.get_children():
+		if child.has_signal("player_entered_collision"):
+			child.connect("player_entered_collision", Callable(self, "colisao_vtx"))
 	
-
+	nodeAnterior[0] = $"../../Vtxs/Vtx14"
+	nodeAnterior[1] = sentidos.EAST
 	
 	nodeAtual[0] = $"../../Vtxs/Vtx14"
+	nodeAtual[1] = sentidos.EAST
 	destinoAtual[0] = $"../../Vtxs/Vtx6"
 	montar_caminho(nodeAtual,destinoAtual)
 
+
+var verif = false
+func colisao_vtx(direcao,vtx):
+	alterar_node(true)
+	if verif:	
+		verif = false	
+		if vtx==nodeAtual[0]:
+			if caminho_atual.size()>1:
+				if direcao == caminho_atual[1][1]:
+					
+					montar_caminho(caminho_atual[1],destinoAtual)
+	if not verif:
+		if vtx==nodeAtual[0]:
+			var dir = nodeAtual[1]
+			var rev = dir
+			if dir==0:
+				rev=1
+			elif dir==1:
+				rev=0
+			elif dir==2:
+				rev=3
+			else:
+				rev = 2
+			if direcao ==rev:
+				verif = true
+				print(verif)
+	
 	
 
 func definir_caminho(start):
@@ -191,6 +226,7 @@ func definir_caminho(start):
 func dijkstra_basico(startN: Array, goalN: Array) -> Array:
 	var start = startN[0]
 	var goal = goalN[0]
+	
 	
 	
 	
@@ -207,7 +243,7 @@ func dijkstra_basico(startN: Array, goalN: Array) -> Array:
 		nao_visitados.append(v)
 
 	dist[start] = 0
-
+	sentido[start] = startN[1]
 	while nao_visitados.size() > 0:
 		nao_visitados.sort_custom(func(a, b): return dist[a] < dist[b])
 		var atual = nao_visitados.pop_front()
@@ -241,22 +277,28 @@ func dijkstra_basico(startN: Array, goalN: Array) -> Array:
 		caminho.insert(0, [u,sentido[u]])
 		u = prev[u]
 		##############################
-	
-	return caminho
+		#print(caminho)
+	return [caminho,dist[goal]]
 	
 
 
 func montar_caminho(start,goal):
-	caminho_atual = dijkstra_basico(start,goal)
+	
+	
+	var resposta = dijkstra_basico(start,goal)
+	caminho_atual = resposta[0]
+	distancia_total = resposta[1]
+	
 	line.clear_points()
 	mapa.line_clear()
 	var first = true
 	for i in caminho_atual:
 		var vertice = i[0]
-		line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 70))
+		line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 68))
 		mapa.create_line_point(vertice.position.z, vertice.position.x)
 		if first:
-			line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 70))
+			line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 68))
+			mapa.create_line_point(vertice.position.z, vertice.position.x)
 			first = false
 	
 
@@ -271,12 +313,28 @@ func _process(delta: float) -> void:
 			if line.get_point_count() > 0:
 				line.set_point_position(0, Vector2((player.position.z * 3 + 60) , (-player.position.x * 3 + 70)))
 			mapa.line_follow(player.position.z, player.position.x)
-			var prox = get_mais_proximo()
-			
-			if prox[0] != nodeAtual[0]:
-				nodeAtual[0] = prox[0]
-				montar_caminho(prox,destinoAtual)
+			alterar_node(false)
 
+func alterar_node(alt):
+	var prox = get_mais_proximo()
+			
+	if prox[0] != nodeAtual[0]:
+		
+		if distancia_total> dijkstra_basico(prox,destinoAtual)[1] || alt:
+		
+			nodeAnterior[0] = nodeAtual[0]
+			nodeAnterior[1] = nodeAtual[1]
+			if listaCaminho[nodeAtual[0]]["N"] == prox[0]:
+				prox[1] = sentidos.NORTH
+			elif listaCaminho[nodeAtual[0]]["S"] == prox[0]:
+				prox[1] = sentidos.SOUTH
+			elif listaCaminho[nodeAtual[0]]["E"] == prox[0]:
+				prox[1] = sentidos.EAST
+			elif listaCaminho[nodeAtual[0]]["W"] == prox[0]:
+				prox[1] = sentidos.WEST
+			nodeAtual[0] = prox[0]
+			nodeAtual[1] = prox[1]
+			montar_caminho(prox,destinoAtual)
 
 func get_mais_proximo():
 	
@@ -289,4 +347,6 @@ func get_mais_proximo():
 		if distancia < menor_dist:
 			menor_dist = distancia
 			prox[0] = ponto
+			
 	return prox
+	
