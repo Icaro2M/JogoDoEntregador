@@ -11,6 +11,7 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 @onready var line := $SubViewportContainer/SubViewport/Rotas/Sprite2D/Line2D
 @onready var arrow := $SubViewportContainer/SubViewport/Sprite2D2
 @onready var parent := $"../../Vtxs"
+@onready var distanceLabel = $"../distanceLabel"
 
 @onready var listaCaminho:= {
 	$"../../Vtxs/Vtx":{
@@ -215,7 +216,7 @@ func colisao_vtx(direcao,vtx):
 				rev = 2
 			if direcao ==rev:
 				verif = true
-				print(verif)
+				
 	
 	
 
@@ -308,7 +309,8 @@ func _process(delta: float) -> void:
 		
 		img.position = Vector2((-3 * player.position.z + 40) , (3 * player.position.x + 30))
 		arrow.rotation = -player.global_rotation.y + 80.1
-		
+		distanceLabel.text = "%d m" % (distancia_total + player.global_position.distance_to(caminho_atual[0][0].global_position))
+		mapa.distanceLabel.text = distanceLabel.text
 		if caminho_atual.size() > 0:
 			if line.get_point_count() > 0:
 				line.set_point_position(0, Vector2((player.position.z * 3 + 60) , (-player.position.x * 3 + 70)))

@@ -8,6 +8,8 @@ extends ColorRect
 
 @onready var iniciou = false
 
+@onready var distanceLabel = $"../distanceLabel"
+
 
 func _process(delta: float) -> void:
 	arrow.position = Vector2(4.1*player.position.z + 530,-4.1*player.position.x + 470)
