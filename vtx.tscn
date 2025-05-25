@@ -7,23 +7,31 @@ size = Vector3(1.78918, 1, 0.00793457)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qmsis"]
 
-[node name="Vtx" type="Area3D"]
+[node name="Vtx" type="Node3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_a541j")
 
-[node name="north" type="CollisionShape3D" parent="."]
+[node name="areaNorth" type="Area3D" parent="."]
+
+[node name="north" type="CollisionShape3D" parent="areaNorth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506, -0.91)
 shape = SubResource("BoxShape3D_ad81v")
 
-[node name="south" type="CollisionShape3D" parent="."]
+[node name="areaSouth" type="Area3D" parent="."]
+
+[node name="south" type="CollisionShape3D" parent="areaSouth"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506, 0.91)
 shape = SubResource("BoxShape3D_ad81v")
 
-[node name="east" type="CollisionShape3D" parent="."]
+[node name="areaEast" type="Area3D" parent="."]
+
+[node name="east" type="CollisionShape3D" parent="areaEast"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.914375, 0.506, 0)
 shape = SubResource("BoxShape3D_ad81v")
 
-[node name="west" type="CollisionShape3D" parent="."]
+[node name="areaWest" type="Area3D" parent="."]
+
+[node name="west" type="CollisionShape3D" parent="areaWest"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.914, 0.506, 0)
 shape = SubResource("BoxShape3D_ad81v")
 

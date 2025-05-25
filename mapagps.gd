@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func create_line_point(pos_z,pos_x):
 	if iniciou:		
-		line.add_point(Vector2(2.9*pos_z + 57, 2.9*-pos_x + 60))
+		line.add_point(Vector2(2.9*pos_z + 57, 2.9*-pos_x + 65))
 
 func line_follow(pos_z, pos_x):
 	if iniciou and line.get_point_count() > 0:
@@ -30,4 +30,4 @@ func line_follow(pos_z, pos_x):
 func line_clear():
 	if iniciou:
 		line.clear_points()
-		line.add_point(Vector2.ZERO)  
+		
