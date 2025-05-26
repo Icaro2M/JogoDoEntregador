@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://bvky810fxlr8l"]
+[gd_scene load_steps=71 format=3 uid="uid://bvky810fxlr8l"]
 
 [ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
@@ -60,6 +60,8 @@
 [ext_resource type="PackedScene" uid="uid://clbt7xn551ltd" path="res://destino.tscn" id="59_mc35t"]
 [ext_resource type="PackedScene" uid="uid://dxm01pfl57fj8" path="res://mapagps.tscn" id="60_agpmf"]
 [ext_resource type="Script" path="res://canvas_layer_2.gd" id="60_hjrt0"]
+[ext_resource type="PackedScene" uid="uid://cjiy7c345n00o" path="res://h_terrain.tscn" id="62_vv8sg"]
+[ext_resource type="PackedScene" uid="uid://bhssa2femlrtb" path="res://tuneu.tscn" id="63_e71lw"]
 [ext_resource type="PackedScene" uid="uid://daolp66cst5y4" path="res://vtx.tscn" id="63_jeai0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sqypw"]
@@ -1868,6 +1870,12 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 70)
 
 [node name="Vtx24" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 10)
+
+[node name="HTerrain" parent="." instance=ExtResource("62_vv8sg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3, -20)
+
+[node name="Tuneu" parent="." instance=ExtResource("63_e71lw")]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 30, 0.969555, -143.062)
 
 [connection signal="body_entered" from="Ponto" to="NPC" method="_on_ponto_body_entered"]
 [connection signal="body_entered" from="destino" to="NPC" method="_on_destino_body_entered"]
