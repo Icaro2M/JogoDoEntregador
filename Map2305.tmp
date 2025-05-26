@@ -1813,6 +1813,7 @@ neighbors = [NodePath("../Vertice19"), NodePath("../Vertice22")]
 
 [node name="NPC" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.981, 0.5, -51.6863)
+playerP = NodePath("../carro")
 
 [node name="Ponto" parent="." instance=ExtResource("58_juogd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.762, 1, -52.622)
@@ -1829,12 +1830,14 @@ target = NodePath("../../carro")
 
 [node name="NPC2" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(0.29107, 0, 0.956702, 0, 1, 0, -0.956702, 0, 0.29107, -16.5401, 0.084, -25.9309)
+playerP = NodePath("../carro")
 
 [node name="Ponto2" parent="." instance=ExtResource("58_juogd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6691, 0.084, -26.3669)
 
 [node name="NPC3" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(-0.999693, 0, -0.0247811, 0, 1, 0, 0.0247811, 0, -0.999693, 34.2128, 0.238431, 75.5773)
+playerP = NodePath("../carro")
 
 [node name="Ponto3" parent="." instance=ExtResource("58_juogd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.1471, 0.232339, 73.9894)
