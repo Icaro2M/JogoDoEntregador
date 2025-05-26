@@ -6,6 +6,8 @@ extends VehicleBody3D
 var steer_target = 0
 @export var engine_force_value = 40
 var can_move = true
+@onready var buzina = get_tree().get_current_scene().get_node("Buzina")
+
 
 @onready var agent: NavigationAgent3D = $NavigationAgent3D
 @onready var navigation_map: NavigationRegion3D = $"../city/NavigationRegion3D"  # ajuste o caminho se necessário
@@ -23,6 +25,10 @@ func set_destination(position: Vector3):
 
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("buzinar"):
+		if buzina and not buzina.playing:
+			buzina.play()
+	
 	if can_move:
 		var speed = linear_velocity.length()*Engine.get_frames_per_second()*delta
 		traction(speed)
