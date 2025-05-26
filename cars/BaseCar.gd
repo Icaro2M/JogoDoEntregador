@@ -73,7 +73,7 @@ func _physics_process(delta):
 		
 
 func set_frozen(freeze: bool):
-	print("chegou")
+	
 	can_move = not freeze
 
 func traction(speed):

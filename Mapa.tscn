@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=71 format=3 uid="uid://bvky810fxlr8l"]
+
 
 [ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
@@ -78,10 +80,26 @@ sky_material = SubResource("ProceduralSkyMaterial_sqypw")
 background_mode = 2
 sky = SubResource("Sky_ypv8u")
 
+
 [sub_resource type="Resource" id="Resource_8mn7q"]
 script = ExtResource("64_ogvvv")
 mode = 0
 textures = [[], []]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a8fe4"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_a47g2"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8142"]
+font_size = 22
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ifg0"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_3r1xo")
@@ -1703,6 +1721,30 @@ transform = Transform3D(0.0349169, 0, -0.99939, 0, 1, 0, 0.99939, 0, 0.0349169, 
 modulate = Color(1, 1, 1, 0.627451)
 target = NodePath("../../carro")
 
+[node name="MapLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 175.0
+offset_top = -260.0
+offset_right = 237.0
+offset_bottom = -229.0
+grow_vertical = 0
+text = "M: 🔍"
+label_settings = SubResource("LabelSettings_a8fe4")
+
+[node name="distanceLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -260.0
+offset_right = 101.0
+offset_bottom = -229.0
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_a8fe4")
+
 [node name="NPC" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.981, 0.5, -51.6863)
 playerP = NodePath("../carro")
@@ -1720,152 +1762,126 @@ script = ExtResource("60_hjrt0")
 [node name="mapagps" parent="CanvasLayer2" instance=ExtResource("60_agpmf")]
 target = NodePath("../../carro")
 
+[node name="zoomLabel" type="Label" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 414.0
+offset_top = 364.0
+offset_right = 505.0
+offset_bottom = 409.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "M: 🔍"
+label_settings = SubResource("LabelSettings_a47g2")
+
+[node name="minLabel" type="Label" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 456.0
+offset_top = 367.0
+offset_right = 496.0
+offset_bottom = 398.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " ❌"
+label_settings = SubResource("LabelSettings_l8142")
+
+[node name="distanceLabel" type="Label" parent="CanvasLayer2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 362.0
+offset_right = 20.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_1ifg0")
+horizontal_alignment = 1
+
 [node name="Vtxs" type="Node3D" parent="."]
 visible = false
 
 [node name="Vtx" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -100)
-South = NodePath("../Vtx3")
-West = NodePath("../Vtx2")
 
 [node name="Vtx2" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -100)
-South = NodePath("../Vtx4")
-East = NodePath("../Vtx")
 
 [node name="Vtx3" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -80)
-North = NodePath("../Vtx")
-South = NodePath("../Vtx6")
-West = NodePath("../Vtx4")
 
 [node name="Vtx4" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -80)
-North = NodePath("../Vtx2")
-South = NodePath("../Vtx7")
-East = NodePath("../Vtx3")
-West = NodePath("../Vtx5")
 
 [node name="Vtx5" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -80)
-South = NodePath("../Vtx8")
-East = NodePath("../Vtx4")
 
 [node name="Vtx6" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -50)
-North = NodePath("../Vtx3")
-South = NodePath("../Vtx9")
-West = NodePath("../Vtx7")
 
 [node name="Vtx7" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -50)
-North = NodePath("../Vtx4")
-South = NodePath("../Vtx10")
-East = NodePath("../Vtx6")
-West = NodePath("../Vtx8")
 
 [node name="Vtx8" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -50)
-North = NodePath("../Vtx5")
-South = NodePath("../Vtx11")
-East = NodePath("../Vtx7")
 
 [node name="Vtx9" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -20)
-North = NodePath("../Vtx6")
-South = NodePath("../Vtx13")
-West = NodePath("../Vtx10")
 
 [node name="Vtx10" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -20)
-North = NodePath("../Vtx7")
-South = NodePath("../Vtx14")
-East = NodePath("../Vtx9")
-West = NodePath("../Vtx11")
 
 [node name="Vtx11" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -20)
-North = NodePath("../Vtx8")
-South = NodePath("../Vtx15")
-East = NodePath("../Vtx10")
-West = NodePath("../Vtx12")
 
 [node name="Vtx12" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, -20)
-South = NodePath("../Vtx16")
-East = NodePath("../Vtx11")
 
 [node name="Vtx13" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 10)
-North = NodePath("../Vtx9")
-South = NodePath("../Vtx17")
-West = NodePath("../Vtx14")
 
 [node name="Vtx14" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 10)
-North = NodePath("../Vtx10")
-South = NodePath("../Vtx18")
-East = NodePath("../Vtx13")
-West = NodePath("../Vtx15")
 
 [node name="Vtx15" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 10)
-North = NodePath("../Vtx11")
-South = NodePath("../Vtx19")
-East = NodePath("../Vtx14")
-West = NodePath("../Vtx24")
 
 [node name="Vtx16" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, 10)
-North = NodePath("../Vtx12")
-East = NodePath("../Vtx24")
 
 [node name="Vtx17" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 40)
-North = NodePath("../Vtx13")
-South = NodePath("../Vtx21")
-West = NodePath("../Vtx18")
 
 [node name="Vtx18" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 40)
-North = NodePath("../Vtx14")
-South = NodePath("../Vtx22")
-East = NodePath("../Vtx17")
-West = NodePath("../Vtx19")
 
 [node name="Vtx19" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 40)
-North = NodePath("../Vtx15")
-South = NodePath("../Vtx23")
-East = NodePath("../Vtx18")
-West = NodePath("../Vtx20")
 
 [node name="Vtx20" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 40)
-North = NodePath("../Vtx24")
-East = NodePath("../Vtx19")
 
 [node name="Vtx21" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 70)
-North = NodePath("../Vtx17")
-West = NodePath("../Vtx22")
 
 [node name="Vtx22" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 70)
-North = NodePath("../Vtx18")
-East = NodePath("../Vtx21")
-West = NodePath("../Vtx23")
 
 [node name="Vtx23" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 70)
-North = NodePath("../Vtx19")
-East = NodePath("../Vtx22")
 
 [node name="Vtx24" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 10)
-South = NodePath("../Vtx20")
-East = NodePath("../Vtx15")
-West = NodePath("../Vtx16")
 
 [node name="HTerrain" type="Node3D" parent="."]
 script = ExtResource("62_gewgi")
