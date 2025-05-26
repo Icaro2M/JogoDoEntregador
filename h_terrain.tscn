@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjiy7c345n00o"]
+
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_v0ioc"]
+[ext_resource type="Resource" path="res://Terrain/data.hterrain" id="2_pw8au"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_gqmmi"]
+
+[sub_resource type="Resource" id="Resource_iupuu"]
+script = ExtResource("3_gqmmi")
+mode = 0
+textures = [[], []]
+
+[node name="HTerrain" type="Node3D"]
+script = ExtResource("1_v0ioc")
+centered = true
+_terrain_data = ExtResource("2_pw8au")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_iupuu")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
