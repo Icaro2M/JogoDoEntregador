@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddat5iv16w7aw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xrqij"]
+radius = 3.39718
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4dvty"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu37u"]
+albedo_color = Color(0.475938, 0.440374, 0.35632, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_k57oh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nu5v"]
+albedo_color = Color(0.47451, 0.439216, 0.356863, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_48edn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8exfh"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7.8534, 0, 0)
+shape = SubResource("CylinderShape3D_xrqij")
+
+[node name="paredes" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.49691e-07, -8, 0, 8, -3.49691e-07, 0, 0, 0, 8, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4dvty")
+surface_material_override/0 = SubResource("StandardMaterial3D_yu37u")
+
+[node name="entrada" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.74846e-07, -4, 0, 4, -1.74846e-07, 0, 0, 0, 4, 7.86261, 0, 0)
+mesh = SubResource("TorusMesh_k57oh")
+surface_material_override/0 = SubResource("StandardMaterial3D_6nu5v")
+
+[node name="passagem" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.0598e-07, -7, 0, 7, -3.0598e-07, 0, 0, 0, 7, 1.70932, 0, 0)
+mesh = SubResource("CylinderMesh_48edn")
+surface_material_override/0 = SubResource("StandardMaterial3D_8exfh")
