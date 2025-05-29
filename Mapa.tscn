@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bvky810fxlr8l"]
+[gd_scene load_steps=82 format=3 uid="uid://bvky810fxlr8l"]
 
 [ext_resource type="Script" path="res://mapa.gd" id="1_3r1xo"]
 [ext_resource type="PackedScene" uid="uid://c7r2ttgt55mij" path="res://Cidade/building_A.gltf" id="1_htplp"]
@@ -55,14 +55,25 @@
 [ext_resource type="PackedScene" uid="uid://dvwo2t2yt11l7" path="res://Cidade/car_sedan.gltf" id="51_s5pow"]
 [ext_resource type="PackedScene" uid="uid://hbbdogfjavct" path="res://carro.tscn" id="52_dh8w2"]
 [ext_resource type="PackedScene" uid="uid://xqlb4cl2si44" path="res://minimap.tscn" id="53_sw417"]
+[ext_resource type="Texture2D" uid="uid://bi12mf4t4e4uw" path="res://textures/palette1.png" id="57_jlyi1"]
 [ext_resource type="PackedScene" uid="uid://42jmd2xvmwqb" path="res://NPC.tscn" id="57_ngs6f"]
+[ext_resource type="Texture2D" uid="uid://28qxprgnngtu" path="res://textures/palette2.png" id="58_1gev7"]
 [ext_resource type="PackedScene" uid="uid://ceaf1u5d8yti2" path="res://ponto.tscn" id="58_juogd"]
 [ext_resource type="PackedScene" uid="uid://clbt7xn551ltd" path="res://destino.tscn" id="59_mc35t"]
+[ext_resource type="Texture2D" uid="uid://cjjvbyfeqyn47" path="res://textures/palette3.png" id="59_r22e6"]
 [ext_resource type="PackedScene" uid="uid://dxm01pfl57fj8" path="res://mapagps.tscn" id="60_agpmf"]
 [ext_resource type="Script" path="res://canvas_layer_2.gd" id="60_hjrt0"]
+[ext_resource type="Texture2D" uid="uid://cgeq21dlmeoas" path="res://textures/palette4.png" id="60_s2elr"]
+[ext_resource type="Texture2D" uid="uid://0hl3wch36c34" path="res://textures/palette5.png" id="61_1m514"]
+[ext_resource type="Texture2D" uid="uid://dj2mijmcginvm" path="res://textures/palette6.png" id="62_jvkfi"]
 [ext_resource type="PackedScene" uid="uid://cjiy7c345n00o" path="res://h_terrain.tscn" id="62_vv8sg"]
 [ext_resource type="PackedScene" uid="uid://bhssa2femlrtb" path="res://tuneu.tscn" id="63_e71lw"]
 [ext_resource type="PackedScene" uid="uid://daolp66cst5y4" path="res://vtx.tscn" id="63_jeai0"]
+[ext_resource type="Texture2D" uid="uid://d1njbvvash04" path="res://textures/palette7.png" id="63_vn0op"]
+[ext_resource type="PackedScene" uid="uid://bqvfp66wj5pvo" path="res://parada_npc.tscn" id="64_htapx"]
+[ext_resource type="Texture2D" uid="uid://b1v8rm1h8vnd5" path="res://textures/palette8.png" id="64_totga"]
+[ext_resource type="Texture2D" uid="uid://8jvmic4x4v1s" path="res://textures/palette9.png" id="65_0xu4m"]
+[ext_resource type="PackedScene" uid="uid://cnruxglstptwl" path="res://saida_npc.tscn" id="65_hrmpd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sqypw"]
 sky_top_color = Color(0.285603, 0.463941, 0.635515, 1)
@@ -1736,6 +1747,7 @@ label_settings = SubResource("LabelSettings_a8fe4")
 [node name="NPC" parent="." instance=ExtResource("57_ngs6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.981, 0.5, -51.6863)
 playerP = NodePath("../carro")
+textures = Array[Texture2D]([ExtResource("57_jlyi1"), ExtResource("58_1gev7"), ExtResource("59_r22e6"), ExtResource("60_s2elr"), ExtResource("61_1m514"), ExtResource("62_jvkfi"), ExtResource("63_vn0op"), ExtResource("64_totga"), ExtResource("65_0xu4m")])
 
 [node name="Ponto" parent="." instance=ExtResource("58_juogd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.762, 1, -52.622)
@@ -1801,81 +1813,279 @@ visible = false
 
 [node name="Vtx" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -100)
+npcOrigin = NodePath("../../Paradas/paradaNPC")
+npcFinish = NodePath("../../Saidas/saida_npc")
 
 [node name="Vtx2" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -100)
+npcOrigin = NodePath("../../Paradas/paradaNPC2")
+npcFinish = NodePath("../../Saidas/saida_npc2")
 
 [node name="Vtx3" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -80)
+npcOrigin = NodePath("../../Paradas/paradaNPC3")
+npcFinish = NodePath("../../Saidas/saida_npc3")
 
 [node name="Vtx4" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -80)
+npcOrigin = NodePath("../../Paradas/paradaNPC4")
+npcFinish = NodePath("../../Saidas/saida_npc4")
 
 [node name="Vtx5" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -80)
+npcOrigin = NodePath("../../Paradas/paradaNPC5")
+npcFinish = NodePath("../../Saidas/saida_npc5")
 
 [node name="Vtx6" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -50)
+npcOrigin = NodePath("../../Paradas/paradaNPC6")
+npcFinish = NodePath("../../Saidas/saida_npc6")
 
 [node name="Vtx7" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -50)
+npcOrigin = NodePath("../../Paradas/paradaNPC7")
+npcFinish = NodePath("../../Saidas/saida_npc7")
 
 [node name="Vtx8" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -50)
+npcOrigin = NodePath("../../Paradas/paradaNPC8")
+npcFinish = NodePath("../../Saidas/saida_npc8")
 
 [node name="Vtx9" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, -20)
+npcOrigin = NodePath("../../Paradas/paradaNPC9")
+npcFinish = NodePath("../../Saidas/saida_npc9")
 
 [node name="Vtx10" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, -20)
+npcOrigin = NodePath("../../Paradas/paradaNPC10")
+npcFinish = NodePath("../../Saidas/saida_npc10")
 
 [node name="Vtx11" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, -20)
+npcOrigin = NodePath("../../Paradas/paradaNPC11")
+npcFinish = NodePath("../../Saidas/saida_npc11")
 
 [node name="Vtx12" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, -20)
+npcOrigin = NodePath("../../Paradas/paradaNPC12")
+npcFinish = NodePath("../../Saidas/saida_npc12")
 
 [node name="Vtx13" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 10)
+npcOrigin = NodePath("../../Paradas/paradaNPC13")
+npcFinish = NodePath("../../Saidas/saida_npc13")
 
 [node name="Vtx14" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 10)
+npcOrigin = NodePath("../../Paradas/paradaNPC14")
+npcFinish = NodePath("../../Saidas/saida_npc14")
 
 [node name="Vtx15" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 10)
+npcOrigin = NodePath("../../Paradas/paradaNPC15")
+npcFinish = NodePath("../../Saidas/saida_npc15")
 
 [node name="Vtx16" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -50, 0, 10)
+npcOrigin = NodePath("../../Paradas/paradaNPC16")
+npcFinish = NodePath("../../Saidas/saida_npc16")
 
 [node name="Vtx17" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 40)
+npcOrigin = NodePath("../../Paradas/paradaNPC17")
+npcFinish = NodePath("../../Saidas/saida_npc17")
 
 [node name="Vtx18" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 40)
+npcOrigin = NodePath("../../Paradas/paradaNPC18")
+npcFinish = NodePath("../../Saidas/saida_npc18")
 
 [node name="Vtx19" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 40)
+npcOrigin = NodePath("../../Paradas/paradaNPC19")
+npcFinish = NodePath("../../Saidas/saida_npc19")
 
 [node name="Vtx20" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 40)
+npcOrigin = NodePath("../../Paradas/paradaNPC20")
+npcFinish = NodePath("../../Saidas/saida_npc20")
 
 [node name="Vtx21" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 80, 0, 70)
+npcOrigin = NodePath("../../Paradas/paradaNPC21")
+npcFinish = NodePath("../../Saidas/saida_npc21")
 
 [node name="Vtx22" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 30, 0, 70)
+npcOrigin = NodePath("../../Paradas/paradaNPC22")
+npcFinish = NodePath("../../Saidas/saida_npc22")
 
 [node name="Vtx23" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10, 0, 70)
+npcOrigin = NodePath("../../Paradas/paradaNPC23")
+npcFinish = NodePath("../../Saidas/saida_npc23")
 
 [node name="Vtx24" parent="Vtxs" instance=ExtResource("63_jeai0")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -30, 0, 10)
+npcOrigin = NodePath("../../Paradas/paradaNPC24")
+npcFinish = NodePath("../../Saidas/saida_npc24")
 
 [node name="HTerrain" parent="." instance=ExtResource("62_vv8sg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3, -20)
 
 [node name="Tuneu" parent="." instance=ExtResource("63_e71lw")]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 30, 0.969555, -143.062)
+
+[node name="Paradas" type="Node3D" parent="."]
+visible = false
+
+[node name="paradaNPC" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74.1156, 0.42155, -94.2659)
+
+[node name="paradaNPC2" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.206, 0.42155, -100.365)
+
+[node name="paradaNPC3" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.7238, 0.42155, -78.0638)
+
+[node name="paradaNPC4" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.9053, 0.42155, -73.8081)
+
+[node name="paradaNPC5" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91114, 0.42155, -73.8081)
+
+[node name="paradaNPC6" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.8152, 0.42155, -51.9885)
+
+[node name="paradaNPC7" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8958, 0.42155, -44.2323)
+
+[node name="paradaNPC8" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.9799, 0.42155, -51.1248)
+
+[node name="paradaNPC9" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.4996, 0.42155, -20.0424)
+
+[node name="paradaNPC10" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.2595, 0.42155, -13.7168)
+
+[node name="paradaNPC11" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.11245, 0.391368, -25.7972)
+
+[node name="paradaNPC12" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.8637, 0.391368, -25.7972)
+
+[node name="paradaNPC13" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.3539, 0.391368, 10.5881)
+
+[node name="paradaNPC14" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1321, 0.391368, 15.4953)
+
+[node name="paradaNPC15" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.18842, 0.391368, 4.37789)
+
+[node name="paradaNPC16" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55.8825, 0.391368, 7.14122)
+
+[node name="paradaNPC17" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.735, 0.391368, 37.8707)
+
+[node name="paradaNPC18" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.1015, 0.391368, 34.3106)
+
+[node name="paradaNPC19" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.77677, 0.391368, 45.7361)
+
+[node name="paradaNPC20" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.794, 0.391368, 33.5871)
+
+[node name="paradaNPC21" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 73.6218, 0.391368, 63.5221)
+
+[node name="paradaNPC22" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4352, 0.391368, 75.7409)
+
+[node name="paradaNPC23" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.1319, 0.391368, 70.3441)
+
+[node name="paradaNPC24" parent="Paradas" instance=ExtResource("64_htapx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.2917, 0.391368, 3.91567)
+
+[node name="Saidas" type="Node3D" parent="."]
+visible = false
+
+[node name="saida_npc" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 87.6571, 0.421551, -89.9704)
+
+[node name="saida_npc2" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2316, 0.421551, -99.9456)
+
+[node name="saida_npc3" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.2406, 0.421551, -69.1851)
+
+[node name="saida_npc4" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.0131, 0.421551, -87.8233)
+
+[node name="saida_npc5" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.8932, 0.421551, -80.0012)
+
+[node name="saida_npc6" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72.9307, 0.421551, -43.3092)
+
+[node name="saida_npc7" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0591, 0.421551, -57.7868)
+
+[node name="saida_npc8" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.696, 0.421551, -60.0141)
+
+[node name="saida_npc9" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.8182, 0.421547, -22.9308)
+
+[node name="saida_npc10" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9591, 0.421547, -13.1394)
+
+[node name="saida_npc11" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.6261, 0.421547, -31.1445)
+
+[node name="saida_npc12" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.98, 0.421547, -27.6819)
+
+[node name="saida_npc13" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 86.9014, 0.421539, 9.98496)
+
+[node name="saida_npc14" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9619, 0.421539, 16.9446)
+
+[node name="saida_npc15" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.1328, 0.421539, 19.1256)
+
+[node name="saida_npc16" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.9558, 0.421539, 2.26754)
+
+[node name="saida_npc17" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.0043, 0.421539, 46.7721)
+
+[node name="saida_npc18" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.3418, 0.421539, 49.9642)
+
+[node name="saida_npc19" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05218, 0.421539, 32.9957)
+
+[node name="saida_npc20" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.0189, 0.421539, 47.5435)
+
+[node name="saida_npc21" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 69.9756, 0.421539, 77.6629)
+
+[node name="saida_npc22" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.1269, 0.421539, 62.2242)
+
+[node name="saida_npc23" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101845, 0.421539, 63.3245)
+
+[node name="saida_npc24" parent="Saidas" instance=ExtResource("65_hrmpd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4237, 0.421539, 19.1232)
 
 [connection signal="body_entered" from="Ponto" to="NPC" method="_on_ponto_body_entered"]
 [connection signal="body_entered" from="destino" to="NPC" method="_on_destino_body_entered"]

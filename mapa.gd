@@ -1,10 +1,40 @@
 extends Node3D
 
-
+@onready var minimap = $CanvasLayer/Minimap
+@onready var randomVtx = null
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	start_position()
+	
+func start_position():
+	var vtx = get_random()
+	minimap.destinoAtual[0] = vtx
+	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
+	$Ponto.position = vtx.global_transform.origin
+	
+	placeNpc(vtx.npcStart)
+	var direction = (vtx.global_transform.origin - $NPC.global_transform.origin).normalized()	
+	var look_target = $NPC.global_transform.origin - direction
+	$NPC.look_at(look_target, Vector3.UP)
 
+func finish_position():
+	var vtx = get_random()
+	minimap.destinoAtual[0] = vtx
+	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
+	$NPC.walk_away_position = vtx.npcDest.global_transform.origin
+	$destino.position = vtx.global_transform.origin
+	
+
+func get_random():
+	var nodes = $Vtxs.get_children()
+	if nodes.size() == 0:
+		return null
+	return nodes[randi()%nodes.size()]
+
+func placeNpc(vtx):
+	$NPC.update_npc()
+	$NPC.current_state = $NPC.State.IDLE
+	$NPC.position = vtx.global_transform.origin
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

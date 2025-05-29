@@ -1,6 +1,11 @@
 extends Node3D
 
 signal player_entered_collision(direcao: String, objeto: Node)
+@export var npcOrigin : NodePath
+@onready var npcStart := get_node(npcOrigin)
+
+@export var npcFinish : NodePath
+@onready var npcDest :=get_node(npcFinish)
 
 func _ready():
 	
