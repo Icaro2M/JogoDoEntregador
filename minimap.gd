@@ -183,26 +183,32 @@ func _ready():
 		if child.has_signal("player_entered_collision"):
 			child.connect("player_entered_collision", Callable(self, "colisao_vtx"))
 	
+	
 	nodeAnterior[0] = $"../../Vtxs/Vtx14"
 	nodeAnterior[1] = sentidos.EAST
 	
 	nodeAtual[0] = $"../../Vtxs/Vtx14"
 	nodeAtual[1] = sentidos.EAST
 	destinoAtual[0] = $"../../Vtxs/Vtx6"
-	montar_caminho(nodeAtual,destinoAtual)
+	
 
 
 var verif = false
+
 func colisao_vtx(direcao,vtx):
+	print(verif)
+	
 	alterar_node(true)
 	if verif:	
 		verif = false	
 		if vtx==nodeAtual[0]:
 			if caminho_atual.size()>1:
 				if direcao == caminho_atual[1][1]:
-					
+									
 					montar_caminho(caminho_atual[1],destinoAtual)
-	if not verif:
+				
+					
+	else:
 		if vtx==nodeAtual[0]:
 			var dir = nodeAtual[1]
 			var rev = dir
@@ -214,17 +220,19 @@ func colisao_vtx(direcao,vtx):
 				rev=3
 			else:
 				rev = 2
+			
 			if direcao ==rev:
 				verif = true
-				
+		
+			
+	
 	
 	
 
-func definir_caminho(start):
-	return $"../../Vtxs/Vtx11"
 
 
 func dijkstra_basico(startN: Array, goalN: Array) -> Array:
+	
 	var start = startN[0]
 	var goal = goalN[0]
 	
@@ -337,6 +345,10 @@ func alterar_node(alt):
 			nodeAtual[0] = prox[0]
 			nodeAtual[1] = prox[1]
 			montar_caminho(prox,destinoAtual)
+
+func clear_routes():
+	line.clear_points()
+	mapa.line_clear()
 
 func get_mais_proximo():
 	
