@@ -8,6 +8,7 @@ func _ready() -> void:
 	
 func start_position():
 	var vtx = get_random()
+	randomVtx = vtx
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
 	$Ponto.position = vtx.global_transform.origin
@@ -19,6 +20,7 @@ func start_position():
 
 func finish_position():
 	var vtx = get_random()
+	randomVtx = vtx
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
 	$NPC.walk_away_position = vtx.npcDest.global_transform.origin
@@ -26,10 +28,24 @@ func finish_position():
 	
 
 func get_random():
-	var nodes = $Vtxs.get_children()
+	var nodes = $CanvasLayer/Minimap.listaCaminho
 	if nodes.size() == 0:
 		return null
-	return nodes[randi()%nodes.size()]
+	var adj = []
+	if randomVtx:
+		for i in nodes[randomVtx]:
+				if nodes[randomVtx][i]:
+					adj.append(nodes[randomVtx][i])
+				
+		var nextVtx = randomVtx
+		var keys = nodes.keys()	
+		while nextVtx == randomVtx or nextVtx in adj:
+				
+			nextVtx = keys[randi()%keys.size()]
+		return nextVtx
+	
+	var keys = nodes.keys()
+	return keys[randi()%keys.size()]
 
 func placeNpc(vtx):
 	$NPC.update_npc()
