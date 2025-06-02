@@ -12,6 +12,8 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 @onready var arrow := $SubViewportContainer/SubViewport/Sprite2D2
 @onready var parent := $"../../Vtxs"
 @onready var distanceLabel = $"../distanceLabel"
+@onready var pontuacaoLabel: Label = get_node("../../CanvasLayer/pontuacaoLabel")
+
 
 @onready var listaCaminho:= {
 	$"../../Vtxs/Vtx":{
@@ -176,6 +178,12 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 
 @onready var distancia_total = 0
 
+var pontuacao := 0
+var distancia_percorrida := 0.0
+var index_caminho := 1
+const DISTANCIA_POR_PONTO := 10.0
+const PONTOS_POR_TRECHO := 10
+
 
 func _ready():
 	var vtxs_node = get_node("../../Vtxs")  # ajuste o caminho conforme sua estrutura
@@ -324,6 +332,31 @@ func _process(delta: float) -> void:
 				line.set_point_position(0, Vector2((player.position.z * 3 + 60) , (-player.position.x * 3 + 70)))
 			mapa.line_follow(player.position.z, player.position.x)
 			alterar_node(false)
+
+		if caminho_atual.size() > 0:
+			if line.get_point_count() > 0:
+				line.set_point_position(0, Vector2((player.position.z * 3 + 60), (-player.position.x * 3 + 70)))
+				mapa.line_follow(player.position.z, player.position.x)
+
+				# Verifica se avancou no caminho correto para pontuar
+				if caminho_atual.size() > index_caminho:
+					var proximo_vertice = caminho_atual[index_caminho][0]
+					var dist = player.global_position.distance_to(proximo_vertice.global_position)
+					var beta = DISTANCIA_POR_PONTO - distancia_percorrida
+					if beta > 0 and dist < beta:
+						pontuacao += PONTOS_POR_TRECHO
+						print("Pontuou! Total: ", pontuacao)
+						distancia_percorrida = 0.0
+						index_caminho += 1
+					else:
+						distancia_percorrida += player.linear_velocity.length() * delta
+						atualizar_distancia_percorrida()
+
+func atualizar_distancia_percorrida():
+	var canvas_layer = get_node("/root/Node3D/CanvasLayer3")
+	if canvas_layer and canvas_layer.has_method("atualizar_distancia"):
+		canvas_layer.atualizar_distancia(distancia_percorrida)
+
 
 func alterar_node(alt):
 	var prox = get_mais_proximo()
