@@ -1951,11 +1951,11 @@ textures = Array[Texture2D]([ExtResource("57_jlyi1"), ExtResource("58_1gev7"), E
 
 [node name="Ponto" type="AudioStreamPlayer" parent="NPC"]
 stream = ExtResource("66_6mhi7")
-volume_db = 24.0
+volume_db = -12.541
 
 [node name="Dinheiro" type="AudioStreamPlayer" parent="NPC"]
 stream = ExtResource("67_b56f2")
-volume_db = 24.0
+volume_db = -14.414
 
 [node name="Ponto" parent="." instance=ExtResource("58_juogd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 81.762, 1, -52.622)
@@ -2297,6 +2297,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.4237, 0.421539, 19.1232)
 
 [node name="SomAmbiente" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("75_8hdrw")
+volume_db = -37.792
 autoplay = true
 parameters/looping = true
 
