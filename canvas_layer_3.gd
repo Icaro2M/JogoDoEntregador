@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var label = $PontuacaoLabel
+@onready var label = $DistanciaLabel
 var dist: int = 0
 
 func atualizar_distancia(valor: int):

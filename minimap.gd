@@ -2,7 +2,6 @@ extends ColorRect
 
 enum sentidos{NORTH, SOUTH, EAST, WEST}
 
-
 @export var target : NodePath
 @onready var player := get_node(target)
 
@@ -12,8 +11,7 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 @onready var arrow := $SubViewportContainer/SubViewport/Sprite2D2
 @onready var parent := $"../../Vtxs"
 @onready var distanceLabel = $"../distanceLabel"
-@onready var pontuacaoLabel: Label = get_node("../../CanvasLayer/pontuacaoLabel")
-
+@onready var distanciaLabel: Label = get_node("../../CanvasLayer/distanciaLabel")
 
 @onready var listaCaminho:= {
 	$"../../Vtxs/Vtx":{
@@ -160,17 +158,10 @@ enum sentidos{NORTH, SOUTH, EAST, WEST}
 		"E":$"../../Vtxs/Vtx15",
 		"W":$"../../Vtxs/Vtx16"	
 	},
-	
 }
-
-
-
-
-
 
 # Caminho real calculado
 @onready var caminho_atual: Array = []
-
 
 @onready var nodeAnterior = [null,null]
 @onready var nodeAtual = [null,null]
@@ -184,13 +175,17 @@ var index_caminho := 1
 const DISTANCIA_POR_PONTO := 10.0
 const PONTOS_POR_TRECHO := 10
 
+# Variáveis para controlar a distância ideal acumulada
+var distancia_total_acumulada := 0.0
+var distancia_caminho_inicial := 0.0
+var destino_alcancado := false
+var primeiro_calculo := true
 
 func _ready():
-	var vtxs_node = get_node("../../Vtxs")  # ajuste o caminho conforme sua estrutura
+	var vtxs_node = get_node("../../Vtxs")
 	for child in vtxs_node.get_children():
 		if child.has_signal("player_entered_collision"):
 			child.connect("player_entered_collision", Callable(self, "colisao_vtx"))
-	
 	
 	nodeAnterior[0] = $"../../Vtxs/Vtx14"
 	nodeAnterior[1] = sentidos.EAST
@@ -199,23 +194,35 @@ func _ready():
 	nodeAtual[1] = sentidos.EAST
 	destinoAtual[0] = $"../../Vtxs/Vtx6"
 	
-
+	# Calcula o primeiro caminho e salva a distância inicial
+	var resultado_inicial = dijkstra_basico(nodeAtual, destinoAtual)
+	caminho_atual = resultado_inicial[0]
+	distancia_total = resultado_inicial[1]
+	distancia_caminho_inicial = distancia_total
+	distancia_total_acumulada = distancia_total
+	
+	# Atualiza a label inicial
+	atualizar_label_distancia_ideal()
+	
+	# Monta o caminho visual
+	montar_caminho_visual()
 
 var verif = false
 
 func colisao_vtx(direcao,vtx):
-	
-	
 	alterar_node(true)
+	
+	# Verifica se chegou ao destino
+	if vtx == destinoAtual[0]:
+		destino_alcancado = true
+		print("Destino alcançado! Preparando para novo destino...")
+	
 	if verif:	
 		verif = false	
 		if vtx==nodeAtual[0]:
 			if caminho_atual.size()>1:
 				if direcao == caminho_atual[1][1]:
-									
 					montar_caminho(caminho_atual[1],destinoAtual)
-				
-					
 	else:
 		if vtx==nodeAtual[0]:
 			var dir = nodeAtual[1]
@@ -231,22 +238,10 @@ func colisao_vtx(direcao,vtx):
 			
 			if direcao ==rev:
 				verif = true
-		
-			
-	
-	
-	
-
-
 
 func dijkstra_basico(startN: Array, goalN: Array) -> Array:
-	
 	var start = startN[0]
 	var goal = goalN[0]
-	
-	
-	
-	
 	
 	var dist = {}
 	var prev = {}
@@ -261,15 +256,12 @@ func dijkstra_basico(startN: Array, goalN: Array) -> Array:
 
 	dist[start] = 0
 	sentido[start] = startN[1]
+	
 	while nao_visitados.size() > 0:
 		nao_visitados.sort_custom(func(a, b): return dist[a] < dist[b])
 		var atual = nao_visitados.pop_front()
-
-		#if atual == goal:
-		#	break
 		
 		var vizinhos = [listaCaminho[atual]["N"],listaCaminho[atual]["S"],listaCaminho[atual]["E"],listaCaminho[atual]["W"]]
-		
 		
 		for vizinho in vizinhos:
 			if vizinho == null or not dist.has(vizinho):
@@ -286,26 +278,37 @@ func dijkstra_basico(startN: Array, goalN: Array) -> Array:
 					sentido[vizinho] = sentidos.EAST
 				else:
 					sentido[vizinho] = sentidos.WEST
-		
 
 	var caminho = []
 	var u = goal
 	while u != null:
 		caminho.insert(0, [u,sentido[u]])
 		u = prev[u]
-		##############################
-		#print(caminho)
+	
 	return [caminho,dist[goal]]
-	
 
-
-func montar_caminho(start,goal):
-	
-	
-	var resposta = dijkstra_basico(start,goal)
+func montar_caminho(start: Array, goal: Array):
+	var resposta = dijkstra_basico(start, goal)
 	caminho_atual = resposta[0]
-	distancia_total = resposta[1]
+	var nova_distancia = resposta[1]
+	distancia_total = nova_distancia
 	
+	# Se é o primeiro cálculo ou se chegou ao destino e está calculando novo caminho
+	if primeiro_calculo:
+		primeiro_calculo = false
+		distancia_caminho_inicial = nova_distancia
+		atualizar_label_distancia_ideal()
+	elif destino_alcancado:
+		# Só adiciona à distância acumulada quando realmente chegou ao destino
+		distancia_total_acumulada += nova_distancia
+		destino_alcancado = false
+		atualizar_label_distancia_ideal()
+		print("Nova distância adicionada. Total acumulado: ", distancia_total_acumulada)
+	
+	# Monta o caminho visual
+	montar_caminho_visual()
+
+func montar_caminho_visual():
 	line.clear_points()
 	mapa.line_clear()
 	var first = true
@@ -317,56 +320,54 @@ func montar_caminho(start,goal):
 			line.add_point(Vector2(vertice.position.z * 3 + 60, -vertice.position.x * 3 + 68))
 			mapa.create_line_point(vertice.position.z, vertice.position.x)
 			first = false
-	
 
+func atualizar_label_distancia_ideal():
+	var canvas_layer := get_tree().get_root().get_node("Node3D/CanvasLayer3")
+	if canvas_layer and canvas_layer.has_node("DistanciaIdealLabel"):
+		canvas_layer.get_node("DistanciaIdealLabel").text = "Distância ideal: %d m" % distancia_total_acumulada
+	else:
+		print("ERRO: Não encontrou a label 'DistanciaIdealLabel' em CanvasLayer3")
 
 func _process(delta: float) -> void:
 	if target:
-		
 		img.position = Vector2((-3 * player.position.z + 40) , (3 * player.position.x + 30))
 		arrow.rotation = -player.global_rotation.y + 80.1
 		distanceLabel.text = "%d m" % (distancia_total + player.global_position.distance_to(caminho_atual[0][0].global_position))
 		mapa.distanceLabel.text = distanceLabel.text
+		
 		if caminho_atual.size() > 0:
 			if line.get_point_count() > 0:
 				line.set_point_position(0, Vector2((player.position.z * 3 + 60) , (-player.position.x * 3 + 70)))
 			mapa.line_follow(player.position.z, player.position.x)
 			alterar_node(false)
 
-		if caminho_atual.size() > 0:
-			if line.get_point_count() > 0:
-				line.set_point_position(0, Vector2((player.position.z * 3 + 60), (-player.position.x * 3 + 70)))
-				mapa.line_follow(player.position.z, player.position.x)
-
-				# Verifica se avancou no caminho correto para pontuar
-				if caminho_atual.size() > index_caminho:
-					var proximo_vertice = caminho_atual[index_caminho][0]
-					var dist = player.global_position.distance_to(proximo_vertice.global_position)
-					var beta = DISTANCIA_POR_PONTO - distancia_percorrida
-					if beta > 0 and dist < beta:
-						pontuacao += PONTOS_POR_TRECHO
-						print("Pontuou! Total: ", pontuacao)
-						distancia_percorrida = 0.0
-						index_caminho += 1
-					else:
-						distancia_percorrida += player.linear_velocity.length() * delta
-						atualizar_distancia_percorrida()
+			# Verifica se avancou no caminho correto para pontuar
+			if caminho_atual.size() > index_caminho:
+				var proximo_vertice = caminho_atual[index_caminho][0]
+				var dist = player.global_position.distance_to(proximo_vertice.global_position)
+				var beta = DISTANCIA_POR_PONTO - distancia_percorrida
+				if beta > 0 and dist < beta:
+					pontuacao += PONTOS_POR_TRECHO
+					print("Pontuou! Total: ", pontuacao)
+					distancia_percorrida = 0.0
+					index_caminho += 1
+				else:
+					distancia_percorrida += player.linear_velocity.length() * delta
+					atualizar_distancia_percorrida()
 
 func atualizar_distancia_percorrida():
 	var canvas_layer = get_node("/root/Node3D/CanvasLayer3")
 	if canvas_layer and canvas_layer.has_method("atualizar_distancia"):
 		canvas_layer.atualizar_distancia(distancia_percorrida)
 
-
 func alterar_node(alt):
 	var prox = get_mais_proximo()
-			
+	
 	if prox[0] != nodeAtual[0]:
-		
-		if distancia_total> dijkstra_basico(prox,destinoAtual)[1] || alt:
-		
+		if distancia_total > dijkstra_basico(prox,destinoAtual)[1] || alt:
 			nodeAnterior[0] = nodeAtual[0]
 			nodeAnterior[1] = nodeAtual[1]
+			
 			if listaCaminho[nodeAtual[0]]["N"] == prox[0]:
 				prox[1] = sentidos.NORTH
 			elif listaCaminho[nodeAtual[0]]["S"] == prox[0]:
@@ -375,6 +376,7 @@ func alterar_node(alt):
 				prox[1] = sentidos.EAST
 			elif listaCaminho[nodeAtual[0]]["W"] == prox[0]:
 				prox[1] = sentidos.WEST
+			
 			nodeAtual[0] = prox[0]
 			nodeAtual[1] = prox[1]
 			montar_caminho(prox,destinoAtual)
@@ -384,16 +386,19 @@ func clear_routes():
 	mapa.line_clear()
 
 func get_mais_proximo():
-	
 	var menor_dist = INF
 	var prox: Array = [null,null]
 	
 	for ponto in listaCaminho:
-		
 		var distancia = player.global_position.distance_to(ponto.global_position)
 		if distancia < menor_dist:
 			menor_dist = distancia
 			prox[0] = ponto
-			
-	return prox
 	
+	return prox
+
+# Função para definir novo destino (chamar quando pegar/entregar passageiro)
+func definir_novo_destino(novo_destino: Node3D):
+	destinoAtual[0] = novo_destino
+	destino_alcancado = false
+	montar_caminho(nodeAtual, destinoAtual)
