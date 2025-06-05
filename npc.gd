@@ -71,7 +71,22 @@ func _on_destino_body_entered(body: Node3D) -> void:
 			$"../CanvasLayer/Minimap".clear_routes()
 			player.set_frozen(true)
 
-			som_dinheiro.play()  # 💰 Toca som ao chegar
+			som_dinheiro.play()
+
+			var pontuacao_label := $"../CanvasLayer/pontuacao"
+			var texto_atual: String = pontuacao_label.text 
+			var pontos: int = 0
+
+			if texto_atual.begins_with("Pontos:"):
+				pontos = int(texto_atual.get_slice(":", 1).strip_edges())
+
+			pontos += 1
+			if pontos >=1:
+				pontuacao_label.text = "💵: %d" % pontos
+			else:
+				pontuacao_label.text = "💵: 0" 
+
+
 
 			await get_tree().create_timer(1.0).timeout
 			current_state = State.REAPPEAR
