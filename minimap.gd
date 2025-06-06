@@ -204,7 +204,7 @@ func _ready():
 var verif = false
 
 func colisao_vtx(direcao,vtx):
-	
+	print(verif)
 	
 	alterar_node(true)
 	if verif:	
