@@ -8,8 +8,10 @@ func _ready() -> void:
 	
 func start_position():
 	var vtx = get_random()
+	
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
+	minimap.change_destiny_position(vtx.position.z,vtx.position.x)
 	$Ponto.position = vtx.global_transform.origin
 	
 	placeNpc(vtx.npcStart)
@@ -19,8 +21,10 @@ func start_position():
 
 func finish_position():
 	var vtx = get_random()
+	
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
+	minimap.change_destiny_position(vtx.position.z,vtx.position.x)
 	$NPC.walk_away_position = vtx.npcDest.global_transform.origin
 	$destino.position = vtx.global_transform.origin
 	
