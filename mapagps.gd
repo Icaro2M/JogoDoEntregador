@@ -32,4 +32,13 @@ func line_follow(pos_z, pos_x):
 func line_clear():
 	if iniciou:
 		line.clear_points()
+
+func change_destiny_position():
+	if iniciou:
+		var last_index = line.get_point_count() - 1
+		var last_point = Vector2(0,0)
+		if last_index >= 0:
+			last_point = line.get_point_position(last_index)
+	
+		$Control/SubViewportContainer/SubViewport/Rotas/Sprite2D/Line2D/destiny.position = ( last_point ) 
 		

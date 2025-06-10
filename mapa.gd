@@ -2,6 +2,8 @@ extends Node3D
 
 @onready var minimap = $CanvasLayer/Minimap
 @onready var randomVtx = null
+
+var distance = 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	start_position()
@@ -11,7 +13,8 @@ func start_position():
 	
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
-	minimap.change_destiny_position(vtx.position.z,vtx.position.x)
+	minimap.change_destiny_position()
+	$CanvasLayer2/mapagps.change_destiny_position()
 	$Ponto.position = vtx.global_transform.origin
 	
 	placeNpc(vtx.npcStart)
@@ -24,9 +27,12 @@ func finish_position():
 	
 	minimap.destinoAtual[0] = vtx
 	minimap.montar_caminho(minimap.nodeAtual,minimap.destinoAtual)
-	minimap.change_destiny_position(vtx.position.z,vtx.position.x)
+	minimap.change_destiny_position()
+	$CanvasLayer2/mapagps.change_destiny_position()
 	$NPC.walk_away_position = vtx.npcDest.global_transform.origin
 	$destino.position = vtx.global_transform.origin
+	distance = minimap.distancia_total + minimap.player.global_position.distance_to(minimap.caminho_atual[0][0].global_position)
+	
 	
 
 func get_random():

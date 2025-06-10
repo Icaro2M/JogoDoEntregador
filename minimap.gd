@@ -398,13 +398,10 @@ func get_mais_proximo():
 	return prox
 
 
-func change_destiny_position(z,x):
+func change_destiny_position():
 	var last_index = line.get_point_count() - 1
 	var last_point = Vector2(0,0)
 	if last_index >= 0:
 		last_point = line.get_point_position(last_index)
-		
 	
-	print(x," ",z)
-	
-	$SubViewportContainer/SubViewport/Rotas/Sprite2D/Line2D/destiny.position = ( last_point ) #Vector2(z*3 + 60,-x*3 + 70)
+	$SubViewportContainer/SubViewport/Rotas/Sprite2D/Line2D/destiny.position = ( last_point ) 
